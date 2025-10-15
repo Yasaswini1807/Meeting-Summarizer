@@ -1,0 +1,87 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: black;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.app-container {
+  background: black;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+}
+
+h1 {
+  color: white;
+  margin-bottom: 25px;
+}
+
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+input[type="file"] {
+  padding: 6px;
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #0078d7;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #005ea3;
+}
+
+button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.summary-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+}
+
+.section {
+  border-left: 4px solid #0078d7;
+  background-color: black;
+  padding: 15px 20px;
+  border-radius: 5px;
+}
+
+.section h2 {
+  color: #0078d7;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.section ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.section li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
