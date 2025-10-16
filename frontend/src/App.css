@@ -1,6 +1,6 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: black;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(180deg, #eaf2ff, #cddffb);
   margin: 0;
   padding: 0;
   display: flex;
@@ -9,79 +9,135 @@ body {
   min-height: 100vh;
 }
 
-.app-container {
-  background: black;
-  padding: 30px 40px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  max-width: 700px;
-  width: 100%;
+.main-container {
+  background-color: white;
+  border-radius: 14px;
+  padding: 40px 50px;
+  max-width: 750px;
+  width: 90%;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
-h1 {
-  color: white;
-  margin-bottom: 25px;
+.title {
+  font-size: 28px;
+  color: #1a4fa3;
+  margin-bottom: 5px;
 }
 
-.upload-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+.subtitle {
+  color: #5b6c8e;
   margin-bottom: 30px;
 }
 
-input[type="file"] {
-  padding: 6px;
+.upload-box {
+  background: #f5f9ff;
+  border: 1.5px dashed #7ca7f9;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Custom file upload button */
+.custom-file-upload {
+  background-color: #2a77f2;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: #1d5edc;
+}
+
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+/* Uploaded filename in black */
+.file-name {
+  color: black;
+  font-size: 14px;
+  margin-top: 5px;
 }
 
 button {
-  padding: 8px 16px;
-  background-color: #0078d7;
+  background-color: #2a77f2;
   color: white;
+  padding: 10px 18px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 15px;
   transition: background 0.3s ease;
 }
 
 button:hover {
-  background-color: #005ea3;
+  background-color: #1d5edc;
 }
 
 button:disabled {
-  background-color: #999;
+  background-color: #99bdf7;
   cursor: not-allowed;
 }
 
-.summary-container {
+.summary-section {
+  text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  text-align: left;
+  gap: 25px;
 }
 
-.section {
-  border-left: 4px solid #0078d7;
-  background-color: black;
-  padding: 15px 20px;
-  border-radius: 5px;
+.summary-block {
+  background-color: #f8faff;
+  border-left: 5px solid #2a77f2;
+  padding: 20px 25px;
+  border-radius: 10px;
 }
 
-.section h2 {
-  color: #0078d7;
-  margin-bottom: 10px;
-  font-size: 18px;
+.summary-block h2 {
+  color: #1a4fa3;
+  margin-bottom: 12px;
+  font-size: 20px;
+  border-bottom: 1px solid #d0e1ff;
+  padding-bottom: 6px;
 }
 
-.section ul {
+.summary-block ul {
   list-style-type: disc;
-  padding-left: 20px;
   margin: 0;
+  padding-left: 20px;
 }
 
-.section li {
-  margin-bottom: 6px;
-  line-height: 1.5;
+.summary-block li {
+  line-height: 1.6;
+  margin-bottom: 10px;
+  color: #333;
+}
+.transcript-section {
+  background-color: #fff8e7;
+  border-left: 5px solid #f2b200;
+  padding: 20px 25px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+
+.transcript-section h2 {
+  color: #f2b200;
+  margin-bottom: 12px;
+  font-size: 20px;
+  border-bottom: 1px solid #ffe9b3;
+  padding-bottom: 6px;
+}
+
+.transcript-section p {
+  color: #333;
+  line-height: 1.6;
 }
