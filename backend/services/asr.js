@@ -1,52 +1,38 @@
+import axios from "axios";
 import fs from "fs";
-import fetch from "node-fetch";
-import path from "path";
-import { fileURLToPath } from "url";
+import FormData from "form-data";
 
-// ✅ Ensure .env is loaded before anything else
-import dotenv from "dotenv";
-dotenv.config();
+export const transcribeAudio = async (filePath) => {
+  try {
+    console.log("Uploading file to Groq:", filePath);
 
-const GROQ_API_KEY = process.env.GROQ_API_KEY;
-const GROQ_API_URL = "https://api.groq.com/openai/v1";
+    // ✅ Ensure the file exists and is readable
+    if (!fs.existsSync(filePath)) {
+      throw new Error(`File not found: ${filePath}`);
+    }
 
-if (!GROQ_API_KEY) {
-  throw new Error("GROQ_API_KEY is not set in .env");
-}
+    const formData = new FormData();
 
-/**
- * Transcribe audio using Groq Whisper
- * @param {string} filePath - path to audio file
- * @returns {Promise<string>} - transcript text
- */
-export async function transcribeAudio(filePath) {
-  // Resolve absolute file path (important for multer temp folders)
-  const absPath = path.resolve(filePath);
+    // ✅ Create a readable stream, not just the file path
+    const fileStream = fs.createReadStream(filePath);
 
-  console.log("🎧 Uploading file to Groq:", absPath);
+    formData.append("file", fileStream);
+    formData.append("model", "whisper-large-v3"); // or your model name
 
-  // ✅ Use native FormData from Node 20+
-  const form = new FormData();
+    const response = await axios.post(
+      "https://api.groq.com/openai/v1/audio/transcriptions",
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
+          ...formData.getHeaders(), // ✅ auto adds multipart boundary
+        },
+      }
+    );
 
-  // ✅ Append file as Blob (NOT set)
-  form.append("file", new Blob([fs.readFileSync(absPath)]), path.basename(absPath));
-  form.append("model", "whisper-large-v3");
-
-  const res = await fetch(`${GROQ_API_URL}/audio/transcriptions`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${GROQ_API_KEY}`,
-    },
-    body: form,
-  });
-
-  if (!res.ok) {
-    const errorText = await res.text();
-    console.error("Groq ASR Error Response:", errorText);
-    throw new Error(`Groq ASR failed: ${errorText}`);
+    return response.data.text;
+  } catch (err) {
+    console.error("Groq ASR Error Response:", err.response?.data || err.message);
+    throw new Error(`Groq ASR failed: ${JSON.stringify(err.response?.data || err.message)}`);
   }
-
-  const data = await res.json();
-  console.log("✅ Transcription received from Groq");
-  return data.text || "";
-}
+};
